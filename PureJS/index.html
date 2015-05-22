@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/1.10.7/integration/jqueryui/dataTables.jqueryui.css">
+</head>
+<body>
+<form>
+    <table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>SKU</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <br><button id="removeRow">Remove selected row</button>
+
+    <br><br><br>
+        Title:<input type="text" id="title" required/><br>
+        SKU:<input type="text" id="sku"><br>
+        Price:<input type="text" id="price"/><br>
+        <button id="addRow">Add</button>
+</form>
+<script src="jquery-1.11.1.min.js"></script>
+<script src="jquery.dataTables.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
