@@ -40,12 +40,7 @@ myApp.controller('ProductListCtrl', function($scope) {
         $scope.products.push({'Title':$scope.Title, 'SKU':$scope.SKU, 'Price':'$' + $scope.Price});
         clearFields();
     };
-
-    $scope.export= function() {
-        $filter('json')($scope.products);
-
-    };
-
+    
     function clearFields() {
         $scope.Title="";
         $scope.SKU="";
