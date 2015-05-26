@@ -40,7 +40,7 @@ var items = [];
 
         delete : function(index) {
             $("tbody tr:eq(" + index + ")").remove();
-            items.remove(index);
+            items.splice(index, 1);
         },
 
         get : function(index) {
