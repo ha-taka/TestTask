@@ -12,9 +12,11 @@ var items = [];
 
         _create: function() {
           this._on({'click .delete':function(event){
-              var index = $(event.target).closest('tr').index();
-              $(event.target).closest('tr').remove();
-              items.splice(index, 1);
+              if (confirm("are you sure to delete?")) {
+                  var index = $(event.target).closest('tr').index();
+                  $(event.target).closest('tr').remove();
+                  items.splice(index, 1);
+              }
           }});
 
             this._on({'click .edit':function(event){

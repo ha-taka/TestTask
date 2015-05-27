@@ -20,6 +20,10 @@ $(function() {
             });
 
             cleanFields();
+            selectedIndex = -1;
+        }
+        else {
+            alert("You need to select 'edit' first!");
         }
     });
 
