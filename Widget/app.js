@@ -7,8 +7,10 @@ $(function() {
     $( "#products" ).test();
 
     $("#add").click(function(){
-        $( "#products" ).test("add", {name:$( "#productname" ).val(), sku:$( "#sku" ).val(), price:$( "#price" ).val()});
-        cleanFields();
+        if (validateFields()) {
+            $("#products").test("add", {name: $("#productname").val(), sku: $("#sku").val(), price: $("#price").val()});
+            cleanFields();
+        }
     });
 
     $("#update").click(function(){
@@ -42,5 +44,19 @@ $(function() {
         $("#productname").val('');
         $("#sku").val('');
         $("#price").val('');
+    }
+
+    function validateFields() {
+        if ($("#productname").val() === '' || $("#sku").val() === '' || $("#price").val() === '') {
+            alert("all fields required!");
+            return false;
+        }
+
+        if (isNaN($("#price").val())) {
+            alert("Price needs to be number!");
+            return false;
+        }
+
+        return true;
     }
 });
