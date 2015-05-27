@@ -48,12 +48,7 @@ var items = [];
             line += '</tr>';
 
             $("tbody tr:eq(" + index + ")").replaceWith(line);
-            items.replace(index, object);
-        },
-
-        delete : function(index) {
-            $("tbody tr:eq(" + index + ")").remove();
-            items.splice(index, 1);
+            items[index] = object;
         }
     });
 }(jQuery));
