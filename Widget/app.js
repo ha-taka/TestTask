@@ -20,11 +20,6 @@ $(function() {
         }
     });
 
-    $( "#products" ).on( "click", "#delete", function() {
-        var index = $(this).closest('tr')[0].sectionRowIndex;
-        $( "#products" ).test("delete", index);
-    });
-
     $( "#products" ).on( "click", "#edit", function() {
         selectedIndex = $(this).closest('tr')[0].sectionRowIndex;
         var product = $( "#products" ).test("get", selectedIndex);

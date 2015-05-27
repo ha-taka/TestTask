@@ -10,14 +10,22 @@ var items = [];
             alert( 'something!' );
         },
 
+        _create: function() {
+          this._on({'click .delete':function(event){
+              var index = $(event.target).closest('tr').index();
+              $(event.target).closest('tr').remove();
+              items.splice(index, 1);
+          }});
+        },
+
         add : function(object) {
             var line = '<tr>';
             $.each(object, function(key, value){
                 line += '<td>' + value + '<td>';
             });
 
-            line += '<td><button id="edit">edit</button></td>';
-            line += '<td><button id="delete">delete</button></td>';
+            line += '<td><button id="edit" class="edit">edit</button></td>';
+            line += '<td><button id="delete" class="delete">delete</button></td>';
             line += '</tr>';
 
             this.element.append(line);
@@ -30,8 +38,8 @@ var items = [];
                 line += '<td>' + value + '<td>';
             });
 
-            line += '<td><button id="edit">edit</button></td>';
-            line += '<td><button id="delete">delete</button></td>';
+            line += '<td><button id="edit" class="edit">edit</button></td>';
+            line += '<td><button id="delete" class="delete">delete</button></td>';
             line += '</tr>';
 
             $("tbody tr:eq(" + index + ")").replaceWith(line);
