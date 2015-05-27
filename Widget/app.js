@@ -19,12 +19,11 @@ $(function() {
             });
         }
     });
-
-    $( "#products" ).on( "click", "#edit", function() {
-        selectedIndex = $(this).closest('tr')[0].sectionRowIndex;
-        var product = $( "#products" ).test("get", selectedIndex);
-        $("#productname").val(product.name);
-        $("#sku").val(product.sku);
-        $("#price").val(product.price);
+    
+    $( "#products" ).on( "testedited", function( event, data, index ) {
+        $("#productname").val(data.name);
+        $("#sku").val(data.sku);
+        $("#price").val(data.price);
+        selectedIndex = index;
     });
 });

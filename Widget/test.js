@@ -16,6 +16,11 @@ var items = [];
               $(event.target).closest('tr').remove();
               items.splice(index, 1);
           }});
+
+            this._on({'click .edit':function(event){
+                var index = $(event.target).closest('tr').index();
+                this._trigger("edited", event, [items[index], index]);
+            }});
         },
 
         add : function(object) {
@@ -49,10 +54,6 @@ var items = [];
         delete : function(index) {
             $("tbody tr:eq(" + index + ")").remove();
             items.splice(index, 1);
-        },
-
-        get : function(index) {
-            return items[index];
         }
     });
 }(jQuery));
