@@ -27,6 +27,10 @@ $(function() {
         }
     });
 
+    $("#export").click(function() {
+        $("#products").test("print");
+    });
+
     $( "#products" ).on( "testedited", function( event, data, index ) {
         $("#productname").val(data.name);
         $("#sku").val(data.sku);

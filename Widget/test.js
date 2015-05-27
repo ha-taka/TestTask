@@ -28,7 +28,7 @@ var items = [];
         add : function(object) {
             var line = '<tr>';
             $.each(object, function(key, value){
-                line += '<td>' + value + '<td>';
+                line += '<td>' + value + '</td>';
             });
 
             line += '<td><button id="edit" class="edit">edit</button></td>';
@@ -42,7 +42,7 @@ var items = [];
         update : function(index, object) {
             var line = '<tr>';
             $.each(object, function(key, value){
-                line += '<td>' + value + '<td>';
+                line += '<td>' + value + '</td>';
             });
 
             line += '<td><button id="edit" class="edit">edit</button></td>';
@@ -51,6 +51,13 @@ var items = [];
 
             $("tbody tr:eq(" + index + ")").replaceWith(line);
             items[index] = object;
+        },
+
+        print: function() {
+            console.log("***** Products List *****");
+            for (var i = 0; i < items.length; i++) {
+                console.log(items[i]);
+            }
         }
     });
 }(jQuery));
