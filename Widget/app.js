@@ -15,14 +15,16 @@ $(function() {
 
     $("#update").click(function(){
         if (selectedIndex !== -1) {
-            $("#products").test("update", selectedIndex, {
-                name: $("#productname").val(),
-                sku: $("#sku").val(),
-                price: $("#price").val()
-            });
+            if (validateFields(selectedIndex)) {
+                $("#products").test("update", selectedIndex, {
+                    name: $("#productname").val(),
+                    sku: $("#sku").val(),
+                    price: $("#price").val()
+                });
 
-            cleanFields();
-            selectedIndex = -1;
+                cleanFields();
+                selectedIndex = -1;
+            }
         }
         else {
             alert("You need to select 'edit' first!");
@@ -46,9 +48,14 @@ $(function() {
         $("#price").val('');
     }
 
-    function validateFields() {
+    function validateFields(index) {
         if ($("#productname").val() === '' || $("#sku").val() === '' || $("#price").val() === '') {
             alert("all fields required!");
+            return false;
+        }
+
+        if ($("#products").test("exists", 'sku', $("#sku").val(), index)) {
+            alert("SKU needs to be unique!");
             return false;
         }
 

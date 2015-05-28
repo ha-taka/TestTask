@@ -7,7 +7,6 @@ var items = [];
 (function($) {
     $.widget("ui.test", {
         _init: function() {
-            alert( 'something!' );
         },
 
         _create: function() {
@@ -58,6 +57,16 @@ var items = [];
             for (var i = 0; i < items.length; i++) {
                 console.log(items[i]);
             }
+        },
+
+        exists: function(key, value, index) {
+            for (var i = 0; i < items.length; i++) {
+                if (index !== i && items[i][key] === value) {
+                    return true;
+                }
+            }
+
+            return false;
         }
     });
 }(jQuery));
