@@ -10,26 +10,47 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<table>
-    <thead>
-    <td>Product</td>
-    <td>SKU</td>
-    <td>Price</td>
-    <td>Action</td>
-    </thead>
-    <tbody id="products">
-    </tbody>
-</table>
+    <div id="products">
+        <table  data-part="grid">
+            <thead>
+                <tr>Name</tr>
+                <tr>SKU</tr>
+                <tr>Price</tr>
+            </thead>
+            <tbody>
+                <tr data-part="grid-row">
+                    <td>{{ name }}</td>
+                    <td>{{ sku }}</td>
+                    <td>{{ price }}</td>
+                    <td>
+                        <button class="edit" name="edit">edit</button>
+                    </td>
+                    <td>
+                        <button class="delete" name="delete">delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-<br><br><br>
-Title:<input type="text" id="productname"/><br>
-SKU:<input type="text" id="sku"/><br>
-Price:<input type="text" id="price"/><br>
-<button id="add">Add</button>
-<button id="update" disabled>Update</button>
-<p class="errorMsg" class="error"></p>
+        <form name="inputForm" data-part="form">
+            <br><br><br>
+            <div>
+            Name:<input type="text" name="name"/>
+            <span name="error" class=".no_error">Name is required</span><br>
+            </div>
+            <div>
+            SKU:<input type="text" name="sku"/>
+            <span class=".no_error">SKU is required/must be unique</span>
+            </div>
+            <div>
+            Price:<input type="text" name="price"/>
+            <span name="error" class=".no_error">Name is required</span></div><br>
+            <button name="add">Add</button>
+            <button name="update">Update</button>
+        </form>
 
-<br><br><br>
-<button id="export">Export</button>
+        <br><br><br><button name="export">Export</button>
+    </div>
+
 </body>
 </html>
