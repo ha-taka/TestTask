@@ -5,7 +5,7 @@
 $(function() {
     $('#products').listWidget();
 
-    $("products").listWidget('setValidators',  {
+    $('#products').listWidget('setValidators',  {
         'name': { required: true },
         'sku': { required: true, unique: true },
         'price': { required: true, number: true }

@@ -1,7 +1,11 @@
 .error {
-    background-color:red;
+    background-color:yellow;
 }
 
 .no_error {
     display:none;
+}
+
+.selected {
+    background-color:lightblue;
 }

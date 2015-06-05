@@ -13,9 +13,11 @@
     <div id="products">
         <table  data-part="grid">
             <thead>
-                <tr>Name</tr>
-                <tr>SKU</tr>
-                <tr>Price</tr>
+                <tr>
+                    <th>Name</th>
+                    <th>SKU</th>
+                    <th>Price</th>
+                </tr>
             </thead>
             <tbody>
                 <tr data-part="grid-row">
@@ -36,17 +38,17 @@
             <br><br><br>
             <div>
             Name:<input type="text" name="name"/>
-            <span name="error" class=".no_error">Name is required</span><br>
+            <span class="error">Required</span><br>
             </div>
             <div>
             SKU:<input type="text" name="sku"/>
-            <span class=".no_error">SKU is required/must be unique</span>
+            <span class="error">Required and must be unique</span>
             </div>
             <div>
             Price:<input type="text" name="price"/>
-            <span name="error" class=".no_error">Name is required</span></div><br>
-            <button name="add">Add</button>
-            <button name="update">Update</button>
+            <span class="error">Required and must be a number</span></div><br>
+            <button name="add" disabled>Add</button>
+            <button name="update" disabled>Update</button>
         </form>
 
         <br><br><br><button name="export">Export</button>
