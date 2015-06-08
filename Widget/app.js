@@ -8,6 +8,10 @@ $(function() {
     $('#products').listWidget('setValidators',  {
         'name': { required: true },
         'sku': { required: true, unique: true },
-        'price': { required: true, number: true }
+        'price': { required: true, posNumber: true }
+    });
+
+    $('#products').listWidget('setFormats', {
+        'price': { currency:true }
     })
 });

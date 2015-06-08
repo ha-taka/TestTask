@@ -38,17 +38,17 @@
             <br><br><br>
             <div>
             Name:<input type="text" name="name"/>
-            <span class="error">Required</span><br>
+            <span class="no_error">Required</span><br>
             </div>
             <div>
             SKU:<input type="text" name="sku"/>
-            <span class="error">Required and must be unique</span>
+            <span class="no_error">Required and must be unique</span>
             </div>
             <div>
             Price:<input type="text" name="price"/>
-            <span class="error">Required and must be a number</span></div><br>
-            <button name="add" disabled>Add</button>
-            <button name="update" disabled>Update</button>
+            <span class="no_error">Required and must be a positive number</span></div><br>
+            <button name="save" disabled>Save</button>
+            <!--button name="update" disabled>Update</button--->
         </form>
 
         <br><br><br><button name="export">Export</button>
