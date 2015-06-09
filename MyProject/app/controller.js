@@ -2,73 +2,71 @@ var myApp = angular.module('myApp', []);
 
 myApp.controller('ProductListCtrl', function() {
     this.products = [
-        {Title: 'tomatoes',
+        {Name: 'tomatoes',
         SKU: '123',
         Price: '3.32'},
-        {Title: 'potatoes',
+        {Name: 'potatoes',
          SKU: '345',
          Price: '4.32'}
     ];
 
+    this.selectedIndex = -1;
+
     this.remove = function(index) {
         if (confirm("Are you sure to delete?")) {
+            if (index === this.selectedIndex) {
+                this.clearFields();
+                this.selectedIndex = -1;
+                this.editing = false;
+            } else {
+                if (index < this.selectedIndex) {
+                    this.selectedIndex = this.selectedIndex - 1;
+                }
+            }
             this.products.splice(index, 1);
         }
-
-        this.editing = false;
     };
 
     this.edit = function(index) {
-        this.Title = this.products[index].Title;
+        this.Name = this.products[index].Name;
         this.SKU = this.products[index].SKU;
         this.Price = this.products[index].Price;
 
         this.editing = true;
-        this.currentIndex = index;
+        this.selectedIndex = index;
     };
 
     this.update = function(index) {
-        if (this.validateFields(index) === true) {
-            this.products[index].Title = this.Title;
-            this.products[index].SKU = this.SKU;
-            this.products[index].Price = this.Price;
+        this.products[index].Name = this.Name;
+        this.products[index].SKU = this.SKU;
+        this.products[index].Price = this.Price;
 
-            this.clearFields();
-            this.editing = false;
-        }
-
+        this.clearFields();
+        this.editing = false;
+        this.selectedIndex = -1;
     };
 
     this.add = function() {
-        if (this.validateFields() === true) {
-            this.products.push({'Title': this.Title, 'SKU': this.SKU, 'Price': this.Price});
-            this.clearFields();
-        }
+        this.products.push({'Name': this.Name, 'SKU': this.SKU, 'Price': this.Price});
+        this.clearFields();
     };
 
-    this.validateFields = function(index) {
+    this.isUnique = function(key, value) {
         for (var i = 0; i < this.products.length; i++) {
-            if (this.products[i].SKU === this.SKU) {
-                if (index !== i) {
-                    alert("SKU needs to be unique!");
-                    return false;
-                }
+            if (i !== this.selectedIndex && this.products[i][key] === value) {
+                return false;
             }
-        }
-
-        if (isNaN(this.Price)) {
-            alert("Price needs to be number!");
-            return false;
         }
 
         return true;
     };
 
     this.clearFields = function() {
-        this.Title="";
+        this.Name="";
         this.SKU="";
         this.Price="";
-    }
+    //    this.inputForm.$setPristine();
+    };
 
     this.export = function() {
         console.log("***** Products List *****")

@@ -4,6 +4,10 @@
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
+<link rel="stylesheet" href="app.css">
+<script src="bower_components/angular/angular.js"></script>
+<script src="app.js"></script>
+<script src="controller.js"></script>
 </head>
 <body ng-controller="ProductListCtrl as main">
 
@@ -12,27 +16,32 @@
 <table>
     <thead>
         <tr>
-            <th>Title</th>
+            <th>Name</th>
             <th>SKU</th>
             <th>Price</th>
         </tr>
     </thead>
-     <tr ng-repeat = 'product in main.products'>
-         <td>{{product.Title}}</td>
+     <tr ng-repeat = 'product in main.products' ng-class="{'selected':$index == main.selectedIndex}">
+         <td>{{product.Name}}</td>
          <td>{{product.SKU}}</td>
-         <td>{{product.Price}}</td>
+         <td>{{product.Price | currency}}</td>
          <td><button ng-click="main.edit($index)">edit</button></td>
          <td><button ng-click="main.remove($index)">delete</button></td>
      </tr>
 </table>
 
 <br><br><br>
-<form name="inputForm">
-Title:<input type="text" ng-model=main.Title required/><br>
-SKU:<input type="text" ng-model=main.SKU required/><br>
-Price:<input type="text" ng-model=main.Price required/><br>
-<button ng-click="main.add()" ng-disabled=inputForm.$invalid ng-hide=main.editing >Add</button>
-<button ng-click="main.update(main.currentIndex)" ng-disabled=inputForm.$invalid ng-show=main.editing >Update</button>
+<form name="inputform">
+Title:<input type="text" name="Name" ng-model="main.Name" required/>
+<span class="error" ng-show="inputform.Name.$dirty && inputform.Name.$error.required">Name is required</span><br>
+SKU:<input type="text" name="SKU" ng-init="main.isSKUUnique = true" ng-model="main.SKU" ng-change="main.isSKUUnique = main.isUnique('SKU', main.SKU)" required/>
+<span class="error" ng-show="inputform.SKU.$dirty && inputform.SKU.$error.required">SKU is required</span>
+<span class="error" ng-hide="main.isSKUUnique">SKU needs to be unique</span><br>
+Price:<input type="text" name="Price" ng-model="main.Price" required ng-pattern="/^\d+\.?\d*$/"/>
+<span class="error" ng-show="inputform.Price.$dirty && inputform.Price.$error.required">Price is required</span><br>
+<span class="error" ng-show="inputform.Price.$dirty && inputform.Price.$error.pattern">Price must be positive number</span><br>
+<button ng-click="main.add()" ng-disabled=inputform.$invalid ng-hide="main.editing" >Add</button>
+<button ng-click="main.update(main.selectedIndex)" ng-disabled=inputform.$invalid ng-show="main.editing" >Update</button>
 </form>
 
 <br><br><br>
@@ -45,8 +54,5 @@ Price:<input type="text" ng-model=main.Price required/><br>
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="app.js"></script>
-  <script src="controller.js"></script>
 </body>
 </html>
