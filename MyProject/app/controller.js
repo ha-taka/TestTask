@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', []);
+var myApp = angular.module('myApp');
 
 myApp.controller('ProductListCtrl', function() {
     this.products = [
@@ -65,7 +65,8 @@ myApp.controller('ProductListCtrl', function() {
         this.Name="";
         this.SKU="";
         this.Price="";
-    //    this.inputForm.$setPristine();
+
+    //    this.inputform.$setPristine();
     };
 
     this.export = function() {

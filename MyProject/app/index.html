@@ -8,6 +8,7 @@
 <script src="bower_components/angular/angular.js"></script>
 <script src="app.js"></script>
 <script src="controller.js"></script>
+<script src="directive.js"></script>
 </head>
 <body ng-controller="ProductListCtrl as main">
 
@@ -34,9 +35,9 @@
 <form name="inputform">
 Title:<input type="text" name="Name" ng-model="main.Name" required/>
 <span class="error" ng-show="inputform.Name.$dirty && inputform.Name.$error.required">Name is required</span><br>
-SKU:<input type="text" name="SKU" ng-init="main.isSKUUnique = true" ng-model="main.SKU" ng-change="main.isSKUUnique = main.isUnique('SKU', main.SKU)" required/>
+SKU:<input type="text" name="SKU" ng-model="main.SKU" index=main.selectedIndex items=main.products required unique-field />
 <span class="error" ng-show="inputform.SKU.$dirty && inputform.SKU.$error.required">SKU is required</span>
-<span class="error" ng-hide="main.isSKUUnique">SKU needs to be unique</span><br>
+<span class="error" ng-show="inputform.SKU.$error.unique">SKU needs to be unique</span><br>
 Price:<input type="text" name="Price" ng-model="main.Price" required ng-pattern="/^\d+\.?\d*$/"/>
 <span class="error" ng-show="inputform.Price.$dirty && inputform.Price.$error.required">Price is required</span><br>
 <span class="error" ng-show="inputform.Price.$dirty && inputform.Price.$error.pattern">Price must be positive number</span><br>
