@@ -2,6 +2,10 @@
     background-color:red;
 }
 
+.init {
+    display:none;
+}
+
 .no_error {
     display:none;
 }

@@ -7,7 +7,11 @@
         required: function(value) {
             return value;
         },
-        unique: function(value, items, selectedIndex, fieldName) {
+        unique: function(value, options) {
+            var items = options['items'];
+            var selectedIndex = options['selectedIndex'];
+            var fieldName = options['fieldName'];
+
             for (var i = 0; i < items.length; i++) {
                 if (i !== selectedIndex && items[i][fieldName] === value) {
                     return false;
@@ -51,6 +55,8 @@
                 var fieldValidators = validators[fieldName];
                 this._on(this._form[fieldName], { change: this._handleChangeEvent(fieldName, fieldValidators) });
             }
+
+            console.log(this.element.find('span.error').length);
         },
 
         setFormats: function(formats) {
@@ -64,20 +70,25 @@
             return function(event) {
                 var field = $(event.target);
                 var value = event.target.value;
-                var error_element = field.parent().find("span");
+                var errorElem = field.parent().find("span");
 
                 $.each(validators, function(validatorName) {
-                    var success = VALIDATORS[validatorName](value, self._items, selectedIndex, fieldName) ;
-                    if (success) {
-                        error_element.removeClass("error").addClass("no_error");
-                    } else {
-                        error_element.removeClass("no_error").addClass("error");
+                    var options = {};
+                    if (validatorName === 'unique') {
+                        options['items'] = self._items;
+                        options['selectedIndex'] = selectedIndex;
+                        options['fieldName'] = fieldName;
+                    }
+
+                    var success = VALIDATORS[validatorName](value, options) ;
+                    errorElem.removeClass("init").removeClass(success? "error":"no_error").addClass(success? "no_error":"error");
+                    if (!success) {
                         return false;
                     }
                 });
 
-                var invalid = $('span.error').length > 0;
-                this._form.save.disabled = invalid;
+                console.log(this.element.find('span.error').length);
+                this._form.save.disabled = this.element.find('span.error').length > 0;
             }
         },
 
@@ -120,7 +131,7 @@
         },
 
         _editItem: function(event) {
-            $('span').removeClass('error').addClass('no_error');
+            this.element.find('span').removeClass('error').addClass('no_error');
 
             var index = $(event.target).closest('tr').index();
             this._objToForm(this._items[index]);
@@ -151,7 +162,8 @@
         },
 
         _clearFields: function() {
-            $("input[type=text]").val('');
+            this.element.find('input[type=text]').val('');
+            this.element.find('span').addClass('error init');
             this._form.save.disabled = true;
         },
 
